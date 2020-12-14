@@ -9,7 +9,7 @@
 */
 
 //CODE HERE
-
+let myArr =[4, 'abc', ['cat', 'dog', 'bird',], 77 ]
 
 ////////////////////PROBLEM 2////////////////////
 /*
@@ -19,6 +19,8 @@
 */
 
 const nestedLetters = ['m', 'g', 'e', 'q', 'h', ['n', 'b', ['v', 'z', 'y', 'r']], 'a']
+
+const foundZ = nestedLetters[5][2][1]
 
 //CODE HERE
 
@@ -36,8 +38,10 @@ const savannah = ['lion', 'zebra', 'lion', 'giraffe']
 const desert = ['rattlesnake', 'coyote']
 //DO NOT EDIT CODE ABOVE
 
-//CODE HERE
+let animals = [...forest, ...ocean, ...savannah, ...desert]
 
+//CODE HERE
+let animalsCopy = [...animals, 'elephant']
 
 /*
     Now use the spread operator to make a copy of your animals array.
@@ -56,7 +60,11 @@ const desert = ['rattlesnake', 'coyote']
 */
 
 //CODE HERE
-
+const compareNums =(num1, num2)=> {
+    if(num1>num2) return num1;
+    if(num2>num1) return num2;
+    if(num1 === num2) return num1 ;
+}
   
 ////////////////////PROBLEM 5////////////////////
 /*
@@ -66,15 +74,14 @@ const desert = ['rattlesnake', 'coyote']
     For example, if we passed in 'Sharknado', 
     we would expect the function to return 'Sharknado is the best movie ever!'
 */
-
 //CODE HERE
-  
+let bestMovie = movie => `${movie} is the best movie ever!`
   
 ////////////////////PROBLEM 6////////////////////
 /*
     Write an arrow function called 'jsNinja' that returns the string: 'I am a JavaScript ninja!'
 */
-
+let jsNinja =()=> `I am a JavaScript ninja!`
 //CODE HERE
   
 
@@ -95,7 +102,7 @@ const desert = ['rattlesnake', 'coyote']
     You don't agree with whowever rated Splendor,
     delete the rating property off of the gameInfo object.
 */
-
+delete gameInfo.rating
 //CODE HERE
   
 
@@ -112,7 +119,11 @@ const desert = ['rattlesnake', 'coyote']
     octagon: 8
   }
 //DO NOT EDIT CODE ABOVE
-  
+for(let key in shapes){
+    if(key % 2 !== 0){
+      delete key
+    } 
+  }
 /*
     You only like even numbers, so get rid of the other shapes by
     looping over the shapes object and deleting any property whose value is odd number.
@@ -159,7 +170,13 @@ const classes = [
     If they are true, change them to false so that now you have 
     all online classes with no homework.
 */
-
+    for(i=0; i<classes.length; i++){
+        for(let key in [i]){
+            if(key === true){
+               
+            }
+        }
+    }
 //CODE HERE
 
   
@@ -175,6 +192,17 @@ const classes = [
 const lettersToPair = ['e', 'k', 's', 'a', 'e', 's', 'a', 'n', 'k', 'n']  
 let pairsArray = []
 //DO NOT EDIT CODE ABOVE
+
+
+for(let i=0; i < lettersToPair.length; i++){
+    for(let j = i+1; j < lettersToPair.length; j++){
+        if([i] === [j]){
+            pairsArray.push([i])
+        }
+    }
+   }
+//    console.log(pairsArray)
+
 
 //CODE HERE
 
@@ -193,8 +221,15 @@ let pairsArray = []
     Those values should come from the functions parameters: name, age, breed, tricks (in order).
 */
 
-//CODE HERE
+function Dog(name, age, breed, tricks){
+    this.name = name;
+    this.age = age;
+    this.breed = breed;
+    this.tricks = tricks;
+}
 
+//CODE HERE
+let fido = new Dog('Fido', 3, 'Jack Russell', ['sit', 'shake'])
 
 /*
     Invoke your dog constructor passing in 'Fido' for the name, 3 for the age, 
@@ -211,9 +246,13 @@ let pairsArray = []
     You will give context to 'bark' using the .call method.
     NAME will come from that context, so you should reference 'this.name' to get the correct name.
 */
+function bark(){
+    return `${this.name} says bark!`
+}
+
 
 //CODE HERE
-
+fidoSpeak = bark.call(fido)
 
 /*
     Invoke the call method on bark, passing in fido as the context
@@ -230,6 +269,11 @@ let pairsArray = []
     You will give context to 'techTrick' using the .bind method.
     Tricks will come from that context, so you should reference 'this.tricks' to access the correct array.
 */
+function teachTrick (trick){
+    this.tricks.push(trick)
+    return this.tricks;
+}
+
 
 //CODE HERE
 
@@ -238,7 +282,7 @@ let pairsArray = []
     Invoke the bind method on teachTrick, passing in fido as the context and the string 'stay' as a trick.
     Save the result to a variable called 'teachStay'.
 */
-
+let teachStay = teachTrick.bind(fido, 'stay')
 //CODE HERE
   
   
@@ -249,9 +293,11 @@ let pairsArray = []
     You will give context to 'dogIntro' using the .apply method.
     Remember to use the 'this' keyword to access values from the context that you will apply.
 */
-
+function dogIntro(treat, toy){
+    return `${this.name} is a ${this.breed} that loves ${treat} and their ${toy}!`
+}
 //CODE HERE
-
+let fidoIntro = dogIntro.apply(fido, ['chicken', 'tennis ball'])
 
 /*
     Invoke the apply method on dogIntro, passing in fido as the context 
@@ -271,7 +317,13 @@ let pairsArray = []
 
 //CODE HERE
 
-  
+  function Phone(brand, model, storage, color, sold){
+      this.brand = brand;
+      this.model = model;
+      this.storage = storage;
+      this.color = color;
+      this.sold = sold;
+  }
 /*
     Next make three new phones using your constructor function.
     Save them to the variables below (make sure you uncomment them).
@@ -284,11 +336,11 @@ let pairsArray = []
 */
 
 //CODE HERE
-  // let phone1 = 
+  let phone1 = new Phone('Apple', 'Iphone X', 64, 'Space Grey', false)
   
-  // let phone2 = 
+  let phone2 = new Phone('Apple', 'Iphone 11', 128, 'Rose Gold', false)
   
-  // let phone3 = 
+  let phone3 = new Phone('Apple', 'Iphone 12', 250, 'Black', false)
   
 /*
     Last, add a prototype method to Phone.
@@ -299,5 +351,8 @@ let pairsArray = []
 */
 
 //CODE HERE
-
+Phone.prototype.sell = function(){
+    this.sold = true;
+   return `${this.brand} ${this.model} has been sold.`
+}
   
